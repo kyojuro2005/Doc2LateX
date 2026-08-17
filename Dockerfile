@@ -26,6 +26,7 @@ RUN pip install --no-cache-dir -r backend/requirements.txt
 
 # Copy backend application source
 COPY backend/ ./backend/
+RUN mkdir -p /app/backend/runtime
 
 # Copy built frontend assets
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
