@@ -9,7 +9,7 @@ from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
 
 from .config import RUNTIME_DIR, MAX_UPLOAD_SIZE_BYTES, MAX_UPLOAD_SIZE_MB, GEMINI_API_KEY, GEMINI_MODEL
-from .database import Base, engine, get_db, SessionLocal
+from .database import Base, engine, get_db, SessionLocal, run_migrations
 from .models import ConversionJob
 from .schemas import JobCreateResponse, JobStatusResponse, TexUpdateRequest
 from .utils import is_allowed_file, safe_filename, validate_file_size
@@ -26,6 +26,7 @@ app.add_middleware(
 )
 
 Base.metadata.create_all(bind=engine)
+run_migrations()
 
 
 def get_job(job_id: int, db: Session) -> ConversionJob:
