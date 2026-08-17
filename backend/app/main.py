@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks, Depends
+from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -74,7 +74,12 @@ def run_conversion(job_id: int):
 
 
 @app.post('/api/upload', response_model=JobCreateResponse)
-async def upload_file(background_tasks: BackgroundTasks, file: UploadFile = File(...), db: Session = Depends(get_db)):
+async def upload_file(
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(...),
+    x_session_id: str | None = Header(None),
+    db: Session = Depends(get_db)
+):
     if not file.filename or not is_allowed_file(file.filename):
         raise HTTPException(status_code=400, detail='Extension non autorisée. Formats acceptés : .png, .jpg, .jpeg, .pdf, .docx, .xlsx')
     
@@ -89,6 +94,7 @@ async def upload_file(background_tasks: BackgroundTasks, file: UploadFile = File
     output_path.write_bytes(content)
     
     job = ConversionJob(
+        session_id=x_session_id,
         filename=filename,
         content_type=file.content_type or 'application/octet-stream',
         status='pending',
@@ -187,8 +193,15 @@ def delete_job(job_id: int, db: Session = Depends(get_db)):
 
 
 @app.get('/api/jobs')
-def list_jobs(db: Session = Depends(get_db)):
-    jobs = db.query(ConversionJob).order_by(ConversionJob.created_at.desc()).all()
+def list_jobs(x_session_id: str | None = Header(None), db: Session = Depends(get_db)):
+    query = db.query(ConversionJob)
+    if x_session_id:
+        query = query.filter(ConversionJob.session_id == x_session_id)
+    else:
+        # If no session ID provided, only show unassigned jobs or empty list
+        query = query.filter(ConversionJob.session_id == None)
+    
+    jobs = query.order_by(ConversionJob.created_at.desc()).all()
     return [
         JobStatusResponse(
             job_id=j.id,

@@ -1,8 +1,23 @@
 import axios from 'axios'
 import type { JobStatus, SystemInfo } from '../types'
 
+function getOrCreateSessionId(): string {
+  let sessionId = localStorage.getItem('DOC2LATEX_SESSION_ID')
+  if (!sessionId) {
+    sessionId = 'sess_' + Math.random().toString(36).substring(2, 15) + '_' + Date.now().toString(36)
+    localStorage.setItem('DOC2LATEX_SESSION_ID', sessionId)
+  }
+  return sessionId
+}
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+})
+
+// Automatically attach unique client session ID to every request for private library isolation
+api.interceptors.request.use((config) => {
+  config.headers['X-Session-ID'] = getOrCreateSessionId()
+  return config
 })
 
 export async function uploadFile(file: File): Promise<{ job_id: number; status: string; message: string }> {
@@ -69,4 +84,3 @@ export async function getTexContentInline(jobId: number): Promise<string> {
 }
 
 export default api
-

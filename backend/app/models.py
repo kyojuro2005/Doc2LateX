@@ -7,6 +7,7 @@ class ConversionJob(Base):
     __tablename__ = 'conversion_jobs'
 
     id = Column(Integer, primary_key=True, index=True)
+    session_id = Column(String(100), nullable=True, index=True)
     filename = Column(String(255), nullable=False)
     content_type = Column(String(50), nullable=False)
     status = Column(String(50), default='pending', nullable=False)
