@@ -16,8 +16,19 @@ export default function NewProjectPage() {
     setError(null)
     try {
       const result = await uploadFile(file)
-      // Poll for completion
+
+      // If conversion completed synchronously (Render mode), navigate immediately
+      if (result.status === 'completed') {
+        setUploading(false)
+        navigate(`/editor/${result.job_id}`)
+        return
+      }
+
+      // Otherwise poll for completion (local dev mode)
+      let attempts = 0
+      const maxAttempts = 60 // 2 minutes max polling
       const pollInterval = setInterval(async () => {
+        attempts++
         try {
           const status = await getJobStatus(result.job_id)
           if (status.status === 'completed') {
@@ -25,6 +36,10 @@ export default function NewProjectPage() {
             setUploading(false)
             navigate(`/editor/${result.job_id}`)
           } else if (status.status === 'failed') {
+            clearInterval(pollInterval)
+            setUploading(false)
+            setError(GENERIC_ERROR_MESSAGE)
+          } else if (attempts >= maxAttempts) {
             clearInterval(pollInterval)
             setUploading(false)
             setError(GENERIC_ERROR_MESSAGE)

@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from pathlib import Path
-from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks, Depends, Header
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
 
 from .config import RUNTIME_DIR, MAX_UPLOAD_SIZE_BYTES, MAX_UPLOAD_SIZE_MB, GEMINI_API_KEY, GEMINI_MODEL
@@ -75,13 +76,12 @@ def run_conversion(job_id: int):
 
 @app.post('/api/upload', response_model=JobCreateResponse)
 async def upload_file(
-    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     x_session_id: str | None = Header(None),
     db: Session = Depends(get_db)
 ):
     if not file.filename or not is_allowed_file(file.filename):
-        raise HTTPException(status_code=400, detail='Extension non autorisée. Formats acceptés : .png, .jpg, .jpeg, .pdf, .docx, .xlsx')
+        raise HTTPException(status_code=400, detail='Extension non autoris\u00e9e. Formats accept\u00e9s : .png, .jpg, .jpeg, .pdf, .docx, .xlsx')
     
     content = await file.read()
     try:
@@ -97,14 +97,21 @@ async def upload_file(
         session_id=x_session_id,
         filename=filename,
         content_type=file.content_type or 'application/octet-stream',
-        status='pending',
+        status='processing',
         source_path=str(output_path),
     )
     db.add(job)
     db.commit()
     db.refresh(job)
-    background_tasks.add_task(run_conversion, job.id)
-    return JobCreateResponse(job_id=job.id, status=job.status, message='Fichier reçu. Conversion en cours.')
+
+    # Run conversion synchronously in a thread pool (avoids Render timeout on BackgroundTasks)
+    try:
+        await run_in_threadpool(run_conversion, job.id)
+    except Exception:
+        pass  # Status is already updated inside run_conversion
+
+    db.refresh(job)
+    return JobCreateResponse(job_id=job.id, status=job.status, message='Conversion termin\u00e9e.' if job.status == 'completed' else 'Conversion en cours.')
 
 
 @app.get('/api/job/{job_id}', response_model=JobStatusResponse)
