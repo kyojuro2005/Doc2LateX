@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: doc2latex
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    region: frankfurt
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3-flash-preview
+      - key: MAX_UPLOAD_SIZE_MB
+        value: 20

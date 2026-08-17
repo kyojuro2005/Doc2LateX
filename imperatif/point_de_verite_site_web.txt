@@ -1,0 +1,381 @@
+===============================================================================
+POINT DE VÉRITÉ — DESIGN & COPYWRITING WEB
+Document de référence obligatoire pour toute création/refonte de site web
+===============================================================================
+
+STATUT : Ce document est une SOURCE DE VÉRITÉ. Tout agent (IA ou humain) qui
+travaille sur un site web dans ce dossier doit lire ce fichier ENTIÈREMENT
+avant de produire la moindre ligne de code ou de texte, et doit s'y conformer
+strictement, sauf instruction contraire explicite et ponctuelle du client.
+
+OBJECTIF : Ne jamais produire un site qui a l'air généré par une IA sans
+retouche humaine. Le site doit être indiscernable d'un site conçu par un
+designer humain expérimenté et spécifique au client.
+
+RÈGLE D'OR : Si en te relisant tu te dis "ça pourrait être n'importe quel
+site de n'importe quelle boîte", tu as échoué. Chaque choix (couleur, mot,
+structure) doit être justifié par le client spécifique, pas par défaut.
+
+===============================================================================
+1. COULEURS
+===============================================================================
+
+1.1 — INTERDICTIONS ABSOLUES (signatures visuelles IA reconnues en 2025-2026)
+
+- INTERDIT : dégradé violet/indigo → bleu (#7C3AED → #6366F1 ou variantes
+  proches). C'est LA signature de v0, Lovable, Bolt, Cursor, ChatGPT Canvas.
+  Reconnaissable instantanément par quiconque a vu 10 sites générés par IA.
+- INTERDIT : fond noir/gris très foncé (#0A0A0F, #0D0D14, #111118) combiné
+  à un accent violet/purple. C'est la combinaison n°1 des templates IA
+  "dark mode SaaS".
+- INTERDIT : dégradé rose → violet → bleu façon "aurora" en arrière-plan de
+  hero section.
+- INTERDIT : glassmorphism par défaut (fond flouté translucide avec bordure
+  1px blanc/10% d'opacité) sans raison esthétique forte et assumée.
+- INTERDIT : icônes dans des carrés/cercles à coins arrondis avec fond de
+  la couleur d'accent à 10-20% d'opacité (ex: fond violet clair + icône
+  violet foncé). C'est un pattern Tailwind/shadcn par défaut, ultra reconnu.
+
+1.2 — MÉTHODE DE CHOIX DE COULEUR
+
+La couleur ne doit JAMAIS être choisie "parce qu'elle est belle" ou "parce
+que c'est la couleur par défaut d'un framework". Elle doit venir d'UNE de
+ces sources, dans cet ordre de préférence :
+  a) La couleur déjà utilisée dans le logo/identité existante du client
+  b) Une couleur culturellement/sémantiquement liée au secteur du client
+     (santé → vert/bleu clinique évité si trop générique, finance → vert
+     foncé/bleu marine mais pas turquoise SaaS, artisanat → couleurs
+     matière/terre, tech B2B → éviter le violet, préférer bleu profond
+     distinctif, orange brûlé, vert forêt)
+  c) Une couleur rare et peu utilisée dans le secteur du client pour se
+     différencier (regarder les 5 concurrents directs et choisir une
+     couleur qu'AUCUN n'utilise)
+
+1.3 — PALETTE DE SECOURS SI AUCUNE DIRECTION CLIENT (à varier, ne jamais
+      réutiliser deux fois la même sur deux projets différents)
+
+- Vert émeraude foncé : #0B4F3C avec accent #1F9D6B
+- Orange brûlé / terracotta : #1A1410 (fond) avec accent #C4622D
+- Bleu pétrole : #0D2B33 avec accent #2E8B9E
+- Bordeaux profond : #2B0E12 avec accent #A8324A
+- Jaune moutarde + charbon : #1C1B18 avec accent #D9A441
+- Vert sauge + crème : #2F3B2E avec accent #E8E4D5 (pour un fond clair)
+
+Ne jamais utiliser deux couleurs d'accent qui créent un dégradé arc-en-ciel
+"violet-rose-bleu". Une seule couleur d'accent forte, utilisée avec parcimonie.
+
+1.4 — MODE CLAIR VS SOMBRE
+
+Ne pas mettre systématiquement le site en dark mode. Le dark mode par
+défaut est lui-même devenu un signal "généré par IA" quand il n'est pas
+justifié par le secteur (gaming, tech dev tools, crypto = ok ; artisanat,
+santé, associations, restauration, droit = préférer un fond clair, blanc
+cassé ou crème, jamais blanc pur #FFFFFF qui est aussi trop générique).
+
+===============================================================================
+2. TYPOGRAPHIE
+===============================================================================
+
+2.1 — INTERDICTIONS
+
+- INTERDIT par défaut : Inter, Poppins, Montserrat, Roboto seules sur tout
+  le site sans aucune autre typo. Ce sont les polices par défaut de
+  Tailwind/shadcn/templates IA. Si utilisées, elles doivent être combinées
+  à une typo de caractère (serif ou display) pour les titres.
+- INTERDIT : tout en majuscules avec letter-spacing large sur CHAQUE titre
+  de section (ex: "N O S   V A L E U R S") — c'est un tic visuel de
+  template que l'IA répète mécaniquement. Utiliser cette technique une
+  fois maximum sur toute la page, pas sur chaque section.
+- INTERDIT : dégradé de couleur appliqué au texte des titres (texte qui
+  passe du blanc au violet, ou du bleu au rose) sur plus d'un endroit du
+  site. C'est un effet devenu cliché par surutilisation dans les sites IA.
+
+2.2 — RECOMMANDATIONS
+
+- Choisir UNE police de titres avec du caractère (une serif distinctive,
+  une slab serif, ou une sans-serif avec une vraie personnalité — pas les
+  4 polices interdites ci-dessus) + UNE police de texte courant lisible.
+- Vérifier que la police choisie n'est pas déjà utilisée par 3 concurrents
+  directs du client.
+- Varier la taille et le poids des titres de section : ne pas répéter
+  exactement la même formule "petit label coloré en majuscules + gros
+  titre bold + sous-titre gris" sur CHAQUE section de la page. Casser le
+  pattern au moins une fois.
+
+===============================================================================
+3. STRUCTURE / LAYOUT
+===============================================================================
+
+3.1 — LE "TEMPLATE IA PAR DÉFAUT" À NE JAMAIS REPRODUIRE TEL QUEL
+
+Voici la structure que génèrent 90% des outils IA (v0, Lovable, Bolt,
+Cursor, Claude, ChatGPT) quand on demande "site vitrine professionnel".
+Si ton site suit CET ORDRE EXACT avec CES ÉLÉMENTS EXACTS, il sera
+immédiatement identifié comme généré par IA :
+
+  1. Header sticky : logo à gauche, nav au centre, bouton CTA violet à droite
+  2. Hero : badge pilule avec petit point coloré + texte, gros titre 2 lignes
+     avec un mot en couleur, sous-titre gris, 2 boutons (1 plein 1 outline),
+     liste de logos clients en dessous ("Ils nous font confiance")
+  3. Bandeau de 4 statistiques en colonnes égales avec gros chiffres colorés
+  4. Section "À propos" : texte à gauche, grille de 4 icônes à droite
+  5. Section "Services/Features" : grille de 3 ou 6 cards identiques avec
+     icône en haut dans un carré coloré, titre, description, lien "En savoir
+     plus →"
+  6. Section "Nos valeurs" : grille de 6 mini-cards avec icône + titre + texte
+  7. Section témoignages : cards avec étoiles, guillemets décoratifs,
+     avatar rond avec initiales colorées, nom + poste
+  8. Section pricing : 3 colonnes, celle du milieu mise en avant avec un
+     badge "Le plus populaire" et une bordure colorée
+  9. CTA final centré : gros titre + 2 boutons
+  10. Footer en 4 colonnes : logo/description, liens services, liens nav,
+      contact + réseaux sociaux
+
+CONSIGNE : casser au minimum 3 de ces 10 patterns sur chaque site produit.
+Ne jamais livrer un site qui coche les 10 cases dans cet ordre exact.
+
+3.2 — COMMENT CASSER LE PATTERN (méthodes concrètes)
+
+- Remplacer au moins une grille de cards identiques par une mise en page
+  asymétrique (une grande card + plusieurs petites, ou un layout en
+  diagonale, ou une timeline).
+- Ne pas mettre systématiquement icône-titre-texte-lien sur les mêmes
+  éléments. Varier : parfois un chiffre, parfois une citation, parfois une
+  vraie photo.
+- Remplacer au moins 2 icônes génériques (Lucide/Heroicons par défaut) par
+  des illustrations sur mesure, des photos réelles, ou des formes
+  dessinées à la main / SVG custom.
+- Éviter que CHAQUE section suive le pattern "label en majuscule coloré +
+  titre + sous-titre centré". Varier l'alignement (gauche parfois), varier
+  la taille.
+- Le bandeau de statistiques (15+, 30+, etc.) ne doit être utilisé QUE si
+  les chiffres sont réels et vérifiables. Sinon, le supprimer purement et
+  simplement — un site sans stats gonflées est plus crédible qu'un site
+  avec des stats invérifiables qui sentent le remplissage.
+
+3.3 — HERO SECTION
+
+- Éviter le badge-pilule "• Votre partenaire en transformation digitale"
+  en haut du hero — c'est un tic de template omniprésent.
+- Le titre du hero doit être spécifique au client, jamais une formule
+  générique du type "Accélérez votre [nom générique] avec [technologie
+  à la mode]". Le titre doit contenir une info concrète, différenciante,
+  ou un bénéfice mesurable — pas un slogan interchangeable.
+
+===============================================================================
+4. COPYWRITING / TEXTE
+===============================================================================
+
+4.1 — PHRASES ET FORMULES INTERDITES (bannies, tous secteurs confondus)
+
+Ces formulations sont si répétées par les IA génératives qu'elles sont
+devenues des marqueurs immédiats de contenu non retouché :
+
+- "Rendre [X] accessible à tous"
+- "Votre partenaire [stratégique / de confiance / privilégié] pour [X]"
+- "Accélérez votre croissance / transformation"
+- "Nous croyons que chaque [client/entreprise] mérite/doit pouvoir..."
+- "Ils étaient sceptiques. Aujourd'hui, ils sont nos meilleurs ambassadeurs."
+- "Des [projets/résultats] qui parlent d'eux-mêmes"
+- "De la conception au déploiement, nous couvrons l'ensemble de..."
+- "Chaque [projet/client] mérite une attention sur mesure, pas une
+  solution générique" (ironique vu le contexte)
+- "Prêt à transformer votre [entreprise/activité] ?"
+- "Décrivez-nous votre projet et nous vous recontactons sous 24h"
+- "Solutions [innovantes / performantes / sur mesure] adaptées à vos besoins"
+- Toute phrase combinant 3 adjectifs vagues à la suite ("innovant,
+  performant, sur mesure")
+- Titres de section formule "Nos [valeurs/services/projets] qui [verbe]"
+
+RÈGLE DE TEST : pour chaque phrase du site, se demander "cette phrase
+pourrait-elle être copiée-collée sur le site d'un concurrent sans que
+personne ne remarque la différence ?". Si oui → réécrire avec une
+information concrète, un chiffre réel, un détail vérifiable propre au
+client.
+
+4.2 — MÉTHODE DE RÉDACTION
+
+- Chaque titre de section doit contenir au moins un élément spécifique au
+  métier réel du client (un nom de process, un chiffre réel, une méthode
+  nommée) — pas une généralité applicable à tout le monde.
+- Préférer les phrases courtes, actives, avec un sujet et un verbe concret,
+  aux formules abstraites ("nous accompagnons", "nous croyons").
+- Éviter la survalorisation systématique ("expertise", "excellence",
+  "performant") sans preuve derrière. Remplacer par des faits : un
+  exemple, un chiffre, un cas réel.
+- Ne jamais utiliser un adjectif s'il n'est pas immédiatement suivi ou
+  précédé d'une preuve concrète.
+
+4.3 — EMOJIS
+
+- INTERDIT dans les titres et sous-titres (✨, 🚀, 💡, 🔥, 🎯) — c'est
+  un des signaux les plus forts et les plus faciles à repérer de contenu
+  IA non filtré.
+- Emojis tolérés uniquement dans un contexte informel explicitement voulu
+  par le client (réseaux sociaux jeunes, ton très décontracté assumé), et
+  jamais plus d'un par section, jamais dans un titre H1/H2.
+
+4.4 — TÉMOIGNAGES
+
+- INTERDIT : témoignages fictifs ou inventés, même "pour faire beau" en
+  attendant les vrais. Un site sans témoignages est plus crédible qu'un
+  site avec des témoignages qu'on ne peut pas vérifier.
+- Si des témoignages sont utilisés, ils doivent avoir : nom complet (pas
+  juste initiale de famille type "Sarah K."), nom de l'entreprise réel et
+  vérifiable (lien vers le site si possible), photo réelle (pas un avatar
+  généré avec initiales dans un cercle coloré).
+- Éviter la formule "J'étais sceptique au début, mais..." répétée sur
+  plusieurs témoignages différents — c'est un pattern rédactionnel que les
+  IA reproduisent systématiquement pour "humaniser" un faux témoignage.
+- Ne jamais avoir plus d'un témoignage qui mentionne "j'avais des doutes /
+  j'étais sceptique" sur toute la page.
+
+4.5 — CHIFFRES ET STATISTIQUES
+
+- INTERDIT d'afficher des chiffres (nombre de clients, projets, années
+  d'expérience) qui ne sont pas strictement vérifiables et vrais au
+  moment de la publication.
+- Vérifier la cohérence interne : si un témoignage dit "structure
+  récente", le bandeau de stats ne doit pas dire "10+ années
+  d'expérience" à un autre endroit du site.
+- Préférer l'absence de statistique à une statistique gonflée ou ronde de
+  manière suspecte (15+, 30+, 100% systématiquement arrondis).
+
+===============================================================================
+5. ICÔNES ET ÉLÉMENTS VISUELS
+===============================================================================
+
+- Éviter d'utiliser exclusivement la librairie Lucide Icons (ou Heroicons)
+  sans aucune personnalisation — c'est la librairie par défaut de presque
+  tous les outils IA de génération de sites.
+- Si Lucide/Heroicons est utilisé (ce qui reste acceptable pour des raisons
+  pratiques), NE PAS systématiquement les mettre dans un carré à coins
+  arrondis avec fond couleur d'accent à faible opacité. Varier le
+  traitement : icônes seules, icônes avec trait fin, mélange avec de
+  vraies photos/captures.
+- Privilégier au moins quelques visuels réels : captures d'écran de vrais
+  projets en taille correcte (pas miniaturisées dans des petites cards
+  toutes identiques), photos réelles de l'équipe/du client, illustrations
+  sur mesure si le budget le permet.
+- Éviter les formes décoratives génériques : blobs flous en arrière-plan,
+  grilles de points, lignes courbes abstraites en dégradé — very "IA
+  landing page 2024".
+
+===============================================================================
+6. COHÉRENCE ET DÉTAILS QUI TRAHISSENT UN SITE NON RELU
+===============================================================================
+
+- Vérifier l'orthographe et les accents partout (l'absence d'accents dans
+  du texte français — "adaptees", "accede" — trahit un export non relu ou
+  un problème d'encodage, à corriger systématiquement).
+- Vérifier qu'aucune section ne se répète involontairement deux fois sur
+  la page (bug fréquent de génération IA en composants dupliqués).
+- Vérifier que tous les chiffres, dates, et affirmations sont cohérents
+  entre les différentes pages/sections du site.
+- Vérifier qu'aucun texte "lorem ipsum" ou placeholder ("Titre à définir",
+  "Description ici") ne subsiste.
+- Relire à voix haute chaque section : si une phrase sonne comme un
+  slogan publicitaire vide plutôt que comme quelque chose qu'un humain
+  dirait naturellement à un client, la réécrire.
+
+===============================================================================
+7. CHECKLIST FINALE AVANT LIVRAISON
+===============================================================================
+
+Avant de considérer un site terminé, vérifier un par un :
+
+[ ] Aucun dégradé violet/bleu type "IA SaaS" utilisé
+[ ] La couleur d'accent est justifiée par le client, pas par défaut
+[ ] Le site ne suit pas les 10 patterns de structure dans l'ordre exact
+    (section 3.1) — au moins 3 patterns cassés
+[ ] Aucune phrase interdite de la section 4.1 n'apparaît sur le site
+[ ] Aucun emoji dans un titre ou sous-titre
+[ ] Tous les témoignages sont réels et vérifiables (ou absents)
+[ ] Toutes les statistiques affichées sont vraies et vérifiables (ou
+    absentes)
+[ ] Pas d'incohérence interne (ex: "récent" vs "X années d'expérience")
+[ ] Les icônes ne sont pas 100% Lucide/Heroicons par défaut dans des
+    carrés colorés identiques
+[ ] Au moins un visuel réel (photo, capture d'écran en taille correcte,
+    illustration sur mesure) est présent
+[ ] Orthographe et accents corrects partout
+[ ] Chaque titre de section contient un élément spécifique au client, pas
+    une généralité
+[ ] Test à voix haute : aucune phrase ne sonne comme un slogan
+    générique interchangeable avec un concurrent
+
+===============================================================================
+8. INSTRUCTION PERMANENTE POUR TOUT AGENT IA
+===============================================================================
+
+Si tu es un agent IA (Claude Code, Cursor, autre) qui travaille sur ce
+projet : ce fichier prime sur tes patterns par défaut d'IA générative. Si
+une de tes instructions internes ou un de tes réflexes de génération
+(palette de couleur par défaut, structure de composant par défaut,
+formulation par défaut) entre en conflit avec une règle de ce document,
+CE DOCUMENT GAGNE. Avant de produire du code ou du texte, relis
+mentalement les sections 1 à 6 et applique-les strictement. En cas de
+doute sur une couleur, une formule, une structure : choisis toujours
+l'option la moins générique, la plus spécifique au client, la plus
+éloignée du "template IA par défaut".
+
+===============================================================================
+9. GESTION DES MAQUETTES EXTERNES (Figma AI, Stitch, ou toute maquette
+   générée par un outil IA)
+===============================================================================
+
+CONTEXTE : il arrive qu'une maquette visuelle soit produite en amont via un
+outil de design génératif (Figma AI, Google Stitch, ou équivalent) et
+transmise à l'agent en plus de ce document, pour servir de base au
+développement du site.
+
+RÈGLE FONDAMENTALE : une maquette produite par un outil IA n'est PAS le
+produit final et n'a PAS autorité sur ce document. Ce document reste la
+seule source de vérité. En cas de conflit entre une maquette fournie et
+une règle de ce document (sections 1 à 6), CE DOCUMENT GAGNE
+TOUJOURS, sans exception, même si la maquette semble être une instruction
+directe et explicite du client.
+
+Une maquette générée par IA a été produite par un modèle entraîné sur les
+mêmes bibliothèques de composants et les mêmes patterns que ceux
+explicitement interdits dans ce document (dégradés violet/bleu, structure
+en 10 blocs standards, icônes Lucide/Material dans des carrés arrondis,
+copywriting générique). Elle est donc très probablement porteuse des mêmes
+défauts que ce document cherche à éliminer. La traiter comme un ordre à
+reproduire à l'identique reviendrait à annuler l'objectif de ce document.
+
+CE QUI DOIT ÊTRE EXTRAIT D'UNE MAQUETTE (utilisable tel quel) :
+- L'architecture de l'information : quelles sections existent, dans quel
+  ordre logique, quel contenu informatif chacune porte
+- La hiérarchie générale : ce qui doit être mis en avant en premier, en
+  second, etc.
+- L'organisation structurelle générale (colonnes, répartition de l'espace,
+  regroupement logique des informations) dans la mesure où elle ne
+  reproduit pas telle quelle un pattern interdit en section 3.1
+
+CE QUI NE DOIT JAMAIS ÊTRE REPRIS TEL QUEL D'UNE MAQUETTE :
+- Les couleurs (à retraiter systématiquement selon la section 1)
+- La typographie (à retraiter systématiquement selon la section 2)
+- Les formulations et textes de la maquette, y compris les titres et le
+  contenu des boutons (à retraiter systématiquement selon la section 4)
+- Les icônes et leur traitement visuel (à retraiter selon la section 5)
+- La structure si elle correspond aux 10 patterns décrits en section 3.1
+  sans variation
+
+MÉTHODE DE TRAVAIL AVEC UNE MAQUETTE EXTERNE :
+1. Lire la maquette comme un brief de contenu et d'organisation, pas comme
+   un design à reproduire pixel pour pixel.
+2. Faire la liste des sections et informations qu'elle contient.
+3. Reconstruire le design de chaque section en appliquant strictement les
+   sections 1 à 6 de ce document, indépendamment de ce à quoi ressemblait
+   la maquette.
+4. Repasser la checklist de la section 7 sur le résultat final avant
+   livraison, en ignorant totalement l'apparence de la maquette de départ.
+
+En résumé : la maquette dit QUOI présenter et dans quel ordre. Ce document
+dit COMMENT le présenter visuellement et textuellement. Le COMMENT prime
+toujours sur l'inspiration visuelle du QUOI.
+
+===============================================================================
+FIN DU DOCUMENT
+===============================================================================

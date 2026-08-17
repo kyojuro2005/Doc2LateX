@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "Doc2LaTeX - Moteur Typographique & OCR",
+  "short_name": "Doc2LaTeX",
+  "description": "Extraction de documents, transcription de formules mathématiques et compilation LaTeX.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FAF9F6",
+  "theme_color": "#0C2237",
+  "categories": ["productivity", "utilities", "education"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
